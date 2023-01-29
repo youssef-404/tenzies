@@ -23,6 +23,30 @@ body{
   background: #F5F5F5;
   border-radius: 10px;
   gap:25px;
+  padding: 20px;
+}
+
+.text{
+  text-align: center;
+  padding: 0 10px;
+}
+
+.title{
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  color: #2B283A;
+  margin-bottom: 5px;
+}
+
+.description{
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;  
+  color: #4A4E74;
 }
 
 .dice-container{
@@ -57,15 +81,15 @@ body{
 }
 
 .app button{
-  width: 92px;
-  height: 35px;
+  width: 100px;
+  height: 37px;
   background: #5035FF;
   box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
   border-radius: 5px;
   font-family: 'Karla';
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 15px;
   color: #FFFFFF;
   border: none;
   cursor: pointer;

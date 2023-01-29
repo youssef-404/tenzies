@@ -4,10 +4,13 @@
 export default function Dice(props){
     return(
         <div
-         className={`dice ${props.isHeld?"dice-clicked":""}`}
+         className={
+            `dice 
+            ${props.isHeld?"dice-clicked":""} 
+            dice_${props.number}`
+        }
          onClick={()=>props.holdDice(props.id)}
          >
-            <p>{props.number}</p>
         </div>
     )
 }

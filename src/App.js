@@ -22,6 +22,8 @@ export default function App() {
   
   const [dice,setDice] =React.useState(allNewDice)
   const [tenzies,setTenzies] =React.useState(false)
+  const [rolls,setRolls]=React.useState(0)
+  const [bestScore,setBestScore] =React.useState(localStorage.getItem("bestScore")||"")
 
   const diceElements=dice.map(number=>{
     return(
@@ -40,10 +42,15 @@ export default function App() {
     if(tenzies){
       setDice(allNewDice())
       setTenzies(false)
+      if(rolls<bestScore || bestScore===""){
+        setBestScore(rolls)
+      }
+      setRolls(0)
     }else{
       setDice(oldDice=>oldDice.map(oldDie=>{
         return !oldDie.isHeld?generateNewDie():oldDie
       }))
+      setRolls(prevRoll=>prevRoll+1)
     }
 }
 
@@ -52,6 +59,10 @@ export default function App() {
       return oldDie.id===id?{...oldDie,isHeld:!oldDie.isHeld}:oldDie
     }))
   }
+
+  React.useEffect(()=>{
+    localStorage.setItem("bestScore",bestScore)
+  },[bestScore])
 
   React.useEffect(()=>{
     const value=dice[0].value
@@ -72,14 +83,28 @@ export default function App() {
       {tenzies &&
         <Confetti/>
       }
-      <div className="text">
-      <h1 className="title">Tenzies</h1>
-      <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+      <div className="info">
+        <div>
+          <p>Best Score</p>
+          <p>{bestScore}</p>
+        </div>
+    
+        <div>
+          <p>Number of rolls</p>
+          <p>{rolls}</p>
+        </div>
       </div>
-      <div className="dice-container">
-        {diceElements}
-      </div>
-      <button onClick={rollDice}>{tenzies?"New Game":"Roll"}</button>
+
+      <div className="game-caontaier">
+        <div className="text">
+          <h1 className="title">Tenzies</h1>
+          <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+        </div>
+        <div className="dice-container">
+          {diceElements}
+        </div>
+        <button onClick={rollDice}>{tenzies?"New Game":"Roll"}</button>
+     </div>
     </div>
   );
 }
